@@ -1,4 +1,4 @@
-rc_38 <- rockland[71:73] |>
+rc_38 <- rockland[149:151] |>
   str_remove_all(pattern = fixed('. .')) |>
   str_remove_all(pattern = fixed(' . ')) |>
   str_remove_all(pattern = ',') |>

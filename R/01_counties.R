@@ -4,9 +4,8 @@ dutchess <- read_html('https://elections.dutchessny.gov/2022/11/08/general-elect
 
 curl_download('https://rocklandgov.com/static_pages/elect_results/EL45.pdf', 'data/rockland.pdf')
 rockland <- pdf_text('data/rockland.pdf') |>
-  pluck(2) |>
   str_split('\n') |>
-  pluck(1) |>
+  unlist() |> 
   str_squish()
 
 westchester <- read_html('https://www.westchestergov.com/boe99/linkcounty.aspx') |>

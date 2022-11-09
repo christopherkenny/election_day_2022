@@ -18,7 +18,7 @@ dc_17 <- dutchess[103:117] |>
     .before = everything()
   )
 
-rc_17 <- rockland[55:57] |>
+rc_17 <- rockland[133:135] |>
   str_remove_all(pattern = fixed('. .')) |>
   str_remove_all(pattern = fixed(' . ')) |>
   str_remove_all(pattern = ',') |>
