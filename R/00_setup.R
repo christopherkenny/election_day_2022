@@ -5,9 +5,12 @@ suppressMessages({
   library(cli)
   library(fs)
   library(readxl)
+  library(gt)
   
   # web stuff ---
   library(curl)
+  library(rvest)
+  library(pdftools)
   
   # alarm project ----
   library(geomander)
