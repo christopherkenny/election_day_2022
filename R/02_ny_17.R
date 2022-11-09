@@ -1,8 +1,4 @@
-dutchess <- read_html('https://elections.dutchessny.gov/2022/11/08/general-election-2022-unofficial-results/') |>
-  html_nodes('tr td') |>
-  html_text()
-
-dc <- dutchess[103:117] |>
+dc_17 <- dutchess[103:117] |>
   matrix(data = _, ncol = 3, byrow = TRUE) |>
   as_tibble(.name_repair = 'unique') |>
   `colnames<-`(c('candidate', 'votes', 'percent')) |>
@@ -22,14 +18,7 @@ dc <- dutchess[103:117] |>
     .before = everything()
   )
 
-curl_download('https://rocklandgov.com/static_pages/elect_results/EL45.pdf', 'data/rockland.pdf')
-rockland <- pdf_text('data/rockland.pdf') |>
-  pluck(2) |>
-  str_split('\n') |>
-  pluck(1) |>
-  str_squish()
-
-rc <- rockland[55:57] |>
+rc_17 <- rockland[55:57] |>
   str_remove_all(pattern = fixed('. .')) |>
   str_remove_all(pattern = fixed(' . ')) |>
   str_remove_all(pattern = ',') |>
@@ -47,11 +36,7 @@ rc <- rockland[55:57] |>
     .before = everything()
   )
 
-westchester <- read_html('https://www.westchestergov.com/boe99/linkcounty.aspx') |>
-  html_nodes('tr td') |>
-  html_text()
-
-wc <- westchester[410:454] |>
+wc_17 <- westchester[410:454] |>
   Filter(function(s) {
     !s %in% c('&nbsp ', '')
   }, x = _) |>
@@ -73,11 +58,7 @@ wc <- westchester[410:454] |>
     .before = everything()
   )
 
-putnam <- read_html('https://putnamboe.com/live-election-results/') |>
-  html_nodes('tr td') |>
-  html_text()
-
-pc <- putnam[196:210] |>
+pc_17 <- putnam[196:210] |>
   str_squish() |>
   str_remove_all(pattern = ',') |>
   str_remove_all(pattern = '%') |>
@@ -99,5 +80,11 @@ pc <- putnam[196:210] |>
   )
 
 bind_rows(
-  rc, wc, pc, dc
-)
+  rc_17, wc_17, pc_17, dc_17
+) |> 
+  group_by(candidate) |> 
+  summarize(votes = sum(votes))
+
+# bind_rows(
+#   rc, wc, pc, dc
+# )
