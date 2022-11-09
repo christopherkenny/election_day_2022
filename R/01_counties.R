@@ -16,3 +16,9 @@ westchester <- read_html('https://www.westchestergov.com/boe99/linkcounty.aspx')
 putnam <- read_html('https://putnamboe.com/live-election-results/') |>
   html_nodes('tr td') |>
   html_text()
+
+nassau <- read_html('https://app.nassaucountyny.gov/BOE/results/election2.html') |> 
+  html_text() |> 
+  str_split('\r\n') |> 
+  unlist() |> 
+  str_squish()
