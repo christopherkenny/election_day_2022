@@ -40,7 +40,7 @@ wc_17 <- westchester[410:454] |>
   Filter(function(s) {
     !s %in% c('&nbsp ', '')
   }, x = _) |>
-  vctrs::vec_slice(i = c(14:16, 25:27)) |>
+  vctrs::vec_slice(i = c(13:15, 24:26)) |>
   str_to_title() |>
   str_remove_all(pattern = ',') |>
   str_remove_all(pattern = '&Nbsp Totals') |>

@@ -22,3 +22,6 @@ nassau <- read_html('https://app.nassaucountyny.gov/BOE/results/election2.html')
   str_split('\r\n') |> 
   unlist() |> 
   str_squish()
+
+suffolk <- read_html('https://www.elections.ny.gov/Suffolk/ElectionNightReporting.html#at/67713ca6-e0a3-48c3-9917-16485efdf454/ar/1/ct/1001') |> 
+  html_elements('tr td')
